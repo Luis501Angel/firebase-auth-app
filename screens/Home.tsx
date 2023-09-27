@@ -3,9 +3,11 @@ import { FIREBASE_AUTH } from "../firebase";
 
 const Home = () => {
 
+  const auth = FIREBASE_AUTH
+
   const handleSignOut = async () => {
     try {
-      FIREBASE_AUTH.signOut()
+      FIREBASE_AUTH.signOut();
     } catch(error: any) {
       console.error(error)
       alert('Sig In failed: ' + error.message);
@@ -14,7 +16,7 @@ const Home = () => {
 
   return (
     <View style={styles.container}>
-      <Text>Email: </Text>
+      <Text>Email: {auth.currentUser?.email}</Text>
       <TouchableOpacity style={styles.button} onPress={handleSignOut}>
         <Text style={styles.buttonText}>Sign Out</Text>
       </TouchableOpacity>
