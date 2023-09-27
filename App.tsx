@@ -1,12 +1,25 @@
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+import Login from './screens/Login';
+import Home from './screens/Home';
+import { useEffect, useState } from 'react';
+import { onAuthStateChanged } from 'firebase/auth';
+import { FIREBASE_AUTH } from './firebase';
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
+  const [user, setUser] = useState<"" | null>(null);
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName='Login'>
+        <Stack.Screen name='Login' component={ Login } options={{ headerShown: false }} />
+        <Stack.Screen name='Home' component={ Home } />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
